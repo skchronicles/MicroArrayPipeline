@@ -47,6 +47,11 @@ library(pd.hugene.1.1.st.v1)
 library(hugene11sttranscriptcluster.db)
 library(pd.mogene.1.1.st.v1)
 library(mogene11sttranscriptcluster.db)
+library(pd.clariom.s.rat)
+library(clariomsrattranscriptcluster.db)
+library(pd.hugene.2.1.st)
+library(hugene21sttranscriptcluster.db)
+#library(primeviewprobe)
 #library(GSEA)
 library(limma)
 library(oligo)
@@ -76,6 +81,7 @@ library(GSEABase)
 library(pheatmap)
 library(viridis)
 library(dendsort)
+library(htmlwidgets)
 
 #setwd('/Users/valdezkm/Documents/MicroarrayPipeline/CodeInProgress/MicroArrayPipeline')
 
@@ -90,7 +96,6 @@ shinyServer(function(input, output) {
       shinyjs::show("hideEverything")
     })
   )
-  
   observeEvent(
     input$button, 
     isolate({
@@ -145,7 +150,6 @@ shinyServer(function(input, output) {
       shinyjs:: show("hideDownloads")
     })
   )
-  
   observeEvent(
     input$GObutton,
     isolate({
@@ -155,7 +159,6 @@ shinyServer(function(input, output) {
       }
     })
   )
-  
   observeEvent(
     input$CELbutton,
     isolate({
@@ -291,102 +294,6 @@ shinyServer(function(input, output) {
     })
   })
   
-  # observeEvent(input$number, {
-  #              isolate({
-  #                output$ui <- renderUI({
-  #                  if (is.null(input$number))
-  #                    return()
-  # 
-  #                  switch(input$number,
-  #                         "1" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "2" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "3" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "4" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "5" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "6" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5",
-  #                                                       "Group_6" = "Group_6"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "7" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5",
-  #                                                       "Group_6" = "Group_6",
-  #                                                       "Group_7" = "Group_7"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "8" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5",
-  #                                                       "Group_6" = "Group_6",
-  #                                                       "Group_7" = "Group_7",
-  #                                                       "Group_8" = "Group_8"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "9" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5",
-  #                                                       "Group_6" = "Group_6",
-  #                                                       "Group_7" = "Group_7",
-  #                                                       "Group_8" = "Group_8",
-  #                                                       "Group_9" = "Group_9"),
-  #                                           selected = "Group_1"
-  #                         ),
-  #                         "10" = selectInput("group1", "Please select a group",
-  #                                           choices = c("Group_1" = "Group_1",
-  #                                                       "Group_2" = "Group_2",
-  #                                                       "Group_3" = "Group_3",
-  #                                                       "Group_4" = "Group_4",
-  #                                                       "Group_5" = "Group_5",
-  #                                                       "Group_6" = "Group_6",
-  #                                                       "Group_7" = "Group_7",
-  #                                                       "Group_8" = "Group_8",
-  #                                                       "Group_9" = "Group_9",
-  #                                                       "Group_10" = "Group_10"),
-  #                                           selected = "Group_1"
-  #                         )
-  #                  )
-  #                })
-  #              })
-  #        })
   
   observeEvent(input$addrow,{
     isolate({
@@ -409,8 +316,6 @@ shinyServer(function(input, output) {
     })
   })
   
-  
-  
   observeEvent(
     input$analyze, {
       isolate({
@@ -424,14 +329,13 @@ shinyServer(function(input, output) {
                 myfiles = input$Indir
                 cels = myfiles$datapath
                 Pheno = v$data
-                row.names(Pheno) = Pheno$file.name
+                rownames(Pheno) = Pheno$title
                 SampleName = myfiles$name
                 pd = AnnotatedDataFrame(Pheno)
                 celfiles = read.celfiles(cels, phenoData = pd)
                 colnames(pData(celfiles))[1] = 'SampleID'  
                 
               } else {
-                
                 id = gsub(" ","",id,fixed=TRUE) 
                 system(paste0('rm *.[cC][eE][lL].gz'))        #removes previous CEL files
                 getGEOSuppFiles(id, makeDirectory = T, baseDir = getwd())
@@ -449,7 +353,6 @@ shinyServer(function(input, output) {
                 }
                 rownames(Pheno) = Pheno$title
                 cels = SampleName
-                
                 incProgress(0.25)
                 
                 pd = AnnotatedDataFrame(Pheno)
@@ -461,7 +364,7 @@ shinyServer(function(input, output) {
               tAnnot = tempfile(pattern = "annotation_", tmpdir = getwd(), fileext = paste0(y,'.txt'))
               cat(celfiles@annotation,file=tAnnot)
               
-              if (celfiles@annotation!="pd.hg.u133.plus.2" & celfiles@annotation!="pd.mogene.2.0.st" & celfiles@annotation!="pd.hugene.2.0.st" & celfiles@annotation!="pd.clariom.s.human.ht" & celfiles@annotation!="pd.clariom.s.human" & celfiles@annotation!="pd.clariom.s.mouse.ht" & celfiles@annotation!="pd.clariom.s.mouse" & celfiles@annotation!='pd.mouse430.2' & celfiles@annotation!='pd.hg.u133a' & celfiles@annotation!='pd.hugene.1.0.st.v1' & celfiles@annotation!='pd.mogene.1.0.st.v1' & celfiles@annotation!='pd.hg.u133a.2' & celfiles@annotation!='pd.huex.1.0.st.v2' & celfiles@annotation!='pd.hg.u219' & celfiles@annotation!='pd.mg.u74av2' & celfiles@annotation!='pd.mouse430a.2' & celfiles@annotation!='pd.moe430a' & celfiles@annotation!='pd.hg.u95av2' & celfiles@annotation!='pd.hta.2.0' & celfiles@annotation!='pd.moex.1.0.st.v1' & celfiles@annotation!='pd.hg.u133b' & celfiles@annotation!='pd.hugene.1.1.st.v1' & celfiles@annotation!='pd.mogene.1.1.st.v1') {
+              if (celfiles@annotation!="pd.hg.u133.plus.2" & celfiles@annotation!="pd.mogene.2.0.st" & celfiles@annotation!="pd.hugene.2.0.st" & celfiles@annotation!="pd.clariom.s.human.ht" & celfiles@annotation!="pd.clariom.s.human" & celfiles@annotation!="pd.clariom.s.mouse.ht" & celfiles@annotation!="pd.clariom.s.mouse" & celfiles@annotation!='pd.mouse430.2' & celfiles@annotation!='pd.hg.u133a' & celfiles@annotation!='pd.hugene.1.0.st.v1' & celfiles@annotation!='pd.mogene.1.0.st.v1' & celfiles@annotation!='pd.hg.u133a.2' & celfiles@annotation!='pd.huex.1.0.st.v2' & celfiles@annotation!='pd.hg.u219' & celfiles@annotation!='pd.mg.u74av2' & celfiles@annotation!='pd.mouse430a.2' & celfiles@annotation!='pd.moe430a' & celfiles@annotation!='pd.hg.u95av2' & celfiles@annotation!='pd.hta.2.0' & celfiles@annotation!='pd.moex.1.0.st.v1' & celfiles@annotation!='pd.hg.u133b' & celfiles@annotation!='pd.hugene.1.1.st.v1' & celfiles@annotation!='pd.mogene.1.1.st.v1' & celfiles@annotation!='pd.clariom.s.rat' & celfiles@annotation!='pd.hugene.2.1.st') {
                 #cat("Please sort your phenotype on sample name and upload it again. \n")
                 info(paste0("Affymetrix platform: ",celfiles@annotation," NOT supported. Leaving..."))
                 stopApp(-1)
@@ -469,13 +372,15 @@ shinyServer(function(input, output) {
               incProgress(0.25)
               
               celfiles
+              
             })
           })
         
         norm=reactive(
           {
+            write.csv(exprs(raw()),'~/Desktop/temp.csv')
             withProgress(message = 'Normalization', detail = 'starting ...', value = 0, {
-              if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=="pd.clariom.s.mouse.ht" | raw()@annotation=="pd.clariom.s.mouse" | raw()@annotation=='pd.mouse430.2' | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.mg.u74av2' | raw()@annotation=='pd.mouse430a.2' | raw()@annotation=='pd.moe430a' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hg.u133b') {
+              if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=="pd.clariom.s.mouse.ht" | raw()@annotation=="pd.clariom.s.mouse" | raw()@annotation=='pd.mouse430.2' | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.mg.u74av2' | raw()@annotation=='pd.mouse430a.2' | raw()@annotation=='pd.moe430a' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.clariom.s.rat') {
                 incProgress(0.5)
                 celfiles.rma =rma(raw(), background=TRUE, normalize=TRUE, subset=NULL)
               } else {
@@ -499,9 +404,13 @@ shinyServer(function(input, output) {
           {
             ##-------------
             withProgress(message = 'Analysis starting...', value = 0, {
-              facs <- factor(pData(raw())$group)
+              
+              sampleColumns = sort(c(which(v$data$group %in% k$k2[,1]),which(v$data$group %in% k$k1[,1])))
+              subs = pData(norm())[sampleColumns,]
+              
+              facs <- factor(subs$group)
               labfacs=levels(facs)
-              nbfacs=length(labfacs)
+              # nbfacs=length(labfacs)
               contra=data.frame(k$k1,k$k2)
               
               nb=dim(contra)[1]
@@ -522,12 +431,12 @@ shinyServer(function(input, output) {
                 #  stopApp(-1)
                 #}
               }
-              
-              myfactor <- factor(pData(norm())$group)
+              myfactor <- factor(subs$group)
               design1 <- model.matrix(~0+myfactor)
               colnames(design1) <- levels(myfactor)
               
-              fit1 <- lmFit(norm(),design1)
+              sub_dat = norm()[,sampleNames(norm())[sampleColumns]]
+              fit1 <- lmFit(sub_dat,design1)
               contrast.matrix <- makeContrasts(contrasts=cons,levels=design1)
               
               fit2 <- contrasts.fit(fit1, contrast.matrix)
@@ -550,7 +459,7 @@ shinyServer(function(input, output) {
               #} 
               
               if (raw()@annotation=="pd.mogene.2.0.st") {  
-                Annot <- data.frame(ACCNUM=sapply(contents(mogene20sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(mogene20sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(mogene20sttranscriptclusterGENENAME), paste, collapse=", "), ENTREZ=sapply(contents(mogene20sttranscriptclusterENTREZID), paste, collapse=", "))     #entrez added to test mouse ssGSEA
+                Annot <- data.frame(ACCNUM=sapply(contents(mogene20sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(mogene20sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(mogene20sttranscriptclusterGENENAME), paste, collapse=", "), ENTREZ=sapply(contents(mogene20sttranscriptclusterENTREZID), paste, collapse=", "))     
                 #Annot <- data.frame(ACCNUM=sapply(contents(mogene20sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(mogene20sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(mogene20sttranscriptclusterGENENAME), paste, collapse=", "))   
               } else {
                 # if (input$Platform=="h133p2") {
@@ -645,6 +554,14 @@ shinyServer(function(input, output) {
                                                             if (raw()@annotation=='pd.mogene.1.1.st.v1') {
                                                               #Annot <- data.frame(ACCNUM=sapply(contents(mogene11sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(mogene11sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(mogene11sttranscriptclusterGENENAME), paste, collapse=", "))
                                                               Annot <- data.frame(ACCNUM=sapply(contents(mogene11sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(mogene11sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(mogene11sttranscriptclusterGENENAME), paste, collapse=", "), ENTREZ=sapply(contents(mogene11sttranscriptclusterENTREZID), paste, collapse=", "))
+                                                            } else{
+                                                              if (raw()@annotation=='pd.clariom.s.rat'){
+                                                                Annot <- data.frame(ACCNUM=sapply(contents(clariomsrattranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(clariomsrattranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(clariomsrattranscriptclusterGENENAME), paste, collapse=", "), ENTREZ=sapply(contents(clariomsrattranscriptclusterENTREZID), paste, collapse=", "))
+                                                              } else {
+                                                                if (raw()@annotation=='pd.hugene.2.1.st') {
+                                                                  Annot <- data.frame(ACCNUM=sapply(contents(hugene21sttranscriptclusterACCNUM), paste, collapse=", "), SYMBOL=sapply(contents(hugene21sttranscriptclusterSYMBOL), paste, collapse=", "), DESC=sapply(contents(hugene21sttranscriptclusterGENENAME), paste, collapse=", "), ENTREZ=sapply(contents(hugene21sttranscriptclusterENTREZID), paste, collapse=", "))
+                                                                }
+                                                              }
                                                             }
                                                           }
                                                         }
@@ -672,6 +589,7 @@ shinyServer(function(input, output) {
               
               incProgress(0.25)
               mylist=vector("list",nb)
+              myCollapsedList=vector("list",nb)
               
               for (i in 1:nb)
               {
@@ -686,28 +604,36 @@ shinyServer(function(input, output) {
                 
                 #add fold change and rearrange columns
                 all$FC = ifelse(all$logFC<0, -1/(2^all$logFC), 2^all$logFC)
-                #all = all[,c(9,1,8,10,11,2,5,6,3,4,7)]
                 all = all[,c(9,12,2,5,6,3,8,10,11,1,4,7)]
-                
-                # Write out to a file:
+                # Write uncollapsed deg out to a file
                 write.table(all,file=paste(input$ProjectID,"_",cons[i],"_all_genes.txt",sep=""),sep="\t",row.names=F)
-                # cat("Contrast: ",i," done \n")
                 
+                # Collapse deg for gui and output, write out to file
+                collapsed = all[,-c(7,10)]
+                collapsed = aggregate(.~SYMBOL+DESC+ENTREZ,data=collapsed,mean)  
+                collapsed = collapsed[,c(1,4:8,2:3,9:10)]
+                write.table(collapsed,file=paste(input$ProjectID,"_",cons[i],"_all_genes_collapsed.txt",sep=""),sep="\t",row.names=F)
+                
+                # create deg lists (both uncollapsed and collapsed) to return
                 mylist[[i]]=all
+                myCollapsedList[[i]] = collapsed
                 ## end for
               }
-              all <- merge(exprs(norm()), Annot,by.x=0, by.y=0, all.x=T)
               
+              # output annotated normalized expression for all samples
+              all_output = merge(exprs(norm()), Annot,by.x=0, by.y=0, all.x=T)
               y<-paste("_",input$ProjectID, sep="")
               tNorm = tempfile(pattern = "normalized_data_", tmpdir = getwd(), fileext = paste0(y,'.txt'))
-              write.table(all,file=tNorm,sep="\t",row.names=F)
-              #  
+              write.table(all_output,file=tNorm,sep="\t",row.names=F)
+              
+              # return annotated normalized expression for chosen samples
+              all <- merge(exprs(sub_dat), Annot,by.x=0, by.y=0, all.x=T)
               names(mylist)=cons
               
               incProgress(0.5, detail = 'DEG done')
               
               #mylist
-              list(mylist=mylist, all=all, cons=cons, design1=design1, nb=nb)
+              list(mylist=mylist, all=all, cons=cons, design1=design1, nb=nb, myCollapsedList=myCollapsedList)
             })
             ##-------------
           }
@@ -749,7 +675,7 @@ shinyServer(function(input, output) {
             #x2=rownames(fin.dw)
             #gdw=apply(array(as.character(x2)),1,function(z) unlist(strsplit(z, "\\|"))[2])
             
-            if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1') 
+            if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1' | raw()@annotation=='pd.hugene.2.1.st') 
             {
               cat(fin.up$SYMBOL,file=(paste0(input$ProjectID,'_',names(deg()$mylist[num]),'_Top500_Up.txt')), sep='\n')
               cat(fin.dw$SYMBOL,file=(paste0(input$ProjectID,'_',names(deg()$mylist[num]),'_Top500_Down.txt')),sep='\n')
@@ -787,7 +713,7 @@ shinyServer(function(input, output) {
               ssgs =  deg()$all
               ssgs = ssgs[ssgs$SYMBOL!='NA',]
               
-              if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1') {
+              if (raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1' | raw()@annotation=='pd.hugene.2.1.st') {
                 ssgs = subset(ssgs, select=-c(ACCNUM,DESC,Row.names,ENTREZ))
                 ssgs = aggregate(.~SYMBOL,data=ssgs,mean)                               #aggregate duplicate probes by mean
                 rownames(ssgs) = ssgs$SYMBOL
@@ -810,6 +736,10 @@ shinyServer(function(input, output) {
               gset = getGmt(input$geneSet) 
               ssgsResults = gsva(ssgs, gset, method='ssgsea')                           #run GSVA
               }
+
+              y<-paste("_",input$ProjectID, sep="")
+              tSS = tempfile(pattern = "ssGSEA_enrichmentScores_", tmpdir = getwd(), fileext = paste0(y,'.txt'))
+              write.table(ssgsResults,file=tSS,sep="\t",col.names=NA)
               
               incProgress(amount = 0.50, detail = 'Performing differential expression analysis of pathways...')
               
@@ -874,6 +804,7 @@ shinyServer(function(input, output) {
         facs <- pData(raw())$SampleID
         nbfacs=length(facs)
         
+        
         for (i in 1:nbfacs) {
           local({
             my_i <- i
@@ -890,6 +821,8 @@ shinyServer(function(input, output) {
         output$rawbox=renderPlot(
           {
             par(mar=c(8,4,4,2))
+            # tempNames = gsub('_(HG-U133A_2).CEL','',pData(raw())$SampleID,fixed = T)
+            # boxplot(raw(), col=colors, which="all", main="Boxplots before normalization",las=2,names=tempNames)
             boxplot(raw(), col=colors, which="all", main="Boxplots before normalization",las=2,names=pData(raw())$SampleID)
           }
         )
@@ -942,17 +875,18 @@ shinyServer(function(input, output) {
         output$rmabox=renderPlot(
           {
             par(mar=c(8,4,4,2))
-            boxplot(norm(),col=colors, main="Boxplots after RMA normalization",las=2,names=pData(norm())$SampleID)
+            tempNames = gsub('_(HG-U133A_2).CEL','',pData(raw())$SampleID,fixed = T)
+            boxplot(norm(),col=colors, main="Boxplots after RMA normalization",las=2,names=tempNames)
           }
         )
         ## end mvaplat after normalization
         
         ## pca 3D
-        output$pca3d=renderRglwidget(
+        output$pca3d=renderPlotly(
           {
             withProgress(message = 'Generating PCA', detail = 'starting ...', value = 0.5, {
               tedf= t(exprs(norm()))
-              
+
               #removes zero  variances (issue with small sample sizes)
               if (length(which(apply(tedf, 2, var)==0)) >= 0){
                 tedf = tedf[ , apply(tedf, 2, var) != 0]
@@ -960,13 +894,21 @@ shinyServer(function(input, output) {
               
               pca=prcomp(tedf, scale. = T)
               incProgress(amount = 0.25, detail = 'determining variance ...')
-              rgl.open(useNULL=T)
-              bg3d('white')
-              plot3d(pca$x[,1:3],col=colors, type='s',size=2)
+
+              pc1.var=round(pca$sdev[1]^2/sum(pca$sdev^2)*100,2)
+              pc2.var=round(pca$sdev[2]^2/sum(pca$sdev^2)*100,2)
+              pc3.var=round(pca$sdev[3]^2/sum(pca$sdev^2)*100,2)
+              
               group.v=as.vector(pData(norm())$SampleID)
-              text3d(pca$x, pca$y, pca$z, group.v, cex=0.6, adj=1.5)
-              par3d(mouseMode = "trackball")
-              rglwidget()
+              p = plot_ly(as.data.frame(pca$x[,1:3]), x = ~PC1, y = ~PC2, z = ~PC3,color = v$data$group, hoverinfo="text",
+                           hovertext = ~group.v) %>%
+                add_markers() %>%
+                layout(scene = list(xaxis = list(title = paste0("PC1 (",pc1.var,"%)")),
+                                    yaxis = list(title = paste0("PC2 (",pc2.var,"%)")),
+                                    zaxis = list(title = paste0("PC3 (",pc3.var,"%)"))))
+              htmlwidgets::saveWidget(as_widget(p), "pca.html")
+              # save(p,file='/Users/valdezkm/Documents/GBM_cellLines_MicroArray/QC/p.RData')
+              p
             })
           }
         )
@@ -984,7 +926,7 @@ shinyServer(function(input, output) {
             k$all = cbind(paste0(k$k1, ' vs ', k$k2))
             num = which(input$NumContrasts==k$all[,1])
             
-            dat = deg()$mylist[[num]]
+            dat = deg()$myCollapsedList[[num]]
             dat = dat[,-3]
             dat[,3:4] = format(dat[,3:4], scientific = TRUE)
             
@@ -999,8 +941,9 @@ shinyServer(function(input, output) {
               dat
             }
             
+            #ENTREZ link (slows down DEG output)
             withProgress(message = 'Processing...', value = 0.75, {
-              dat$ENTREZ <- sapply(dat$ENTREZ, function(x) 
+              dat$ENTREZ <- sapply(dat$ENTREZ, function(x)
               toString(tags$a(href=paste0("https://www.ncbi.nlm.nih.gov/gene/", x), x)))
 
               dat
@@ -1032,7 +975,7 @@ shinyServer(function(input, output) {
                                                             "return type === 'display' && data.length > 30 ?",
                                                             "'<span title=\"' + data + '\">' + data.substr(0, 30) + '...</span>' : data;",
                                                             "}")))), callback = JS('table.page(3).draw(false);')
-        )
+        ,selection='single')
         )
         output$topDown=DT::renderDataTable(DT::datatable(
           {
@@ -1057,7 +1000,112 @@ shinyServer(function(input, output) {
                                                             "return type === 'display' && data.length > 30 ?",
                                                             "'<span title=\"' + data + '\">' + data.substr(0, 30) + '...</span>' : data;",
                                                             "}")))), callback = JS('table.page(3).draw(false);')
+        ,selection='single')
         )
+        output$geneHeatmapUp=renderPlot(
+          {
+            if (length(pathways()$up[input$topUp_rows_selected, 'gene.list'])==0){
+              showNotification('Select a pathway to see heatmap below', duration = NULL)
+            } else {
+              human2mouse = read.delim('human2mouse.csv',sep=',')
+              #select user input pathway, extract genes
+              genes = pathways()$up[input$topUp_rows_selected, 'gene.list']
+              genes = strsplit(as.character(genes),' ')
+              genes = unlist(genes)
+              
+              #extract normalized expression, subset by genes, filter columns, aggregate duplicate symbols with means
+              exp = deg()$all
+              exp = exp[exp$SYMBOL %in% genes,]
+              #if mouse data, convert from human to mouse gene orthologs
+              if (!(raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1' | raw()@annotation=='pd.hugene.2.1.st')) {
+                genes = human2mouse$mouse[human2mouse$human %in% genes]
+                genes = as.character(genes)
+                exp = deg()$all
+                exp = exp[exp$SYMBOL %in% genes,]
+              }
+              exp = subset(exp, select = -c(ACCNUM,DESC,ENTREZ,Row.names))
+              exp = aggregate(.~SYMBOL,data=exp,mean)
+              
+              #extract user input contrasts (columns)
+              k$all = cbind(paste0(k$k1, ' vs ', k$k2))
+              num = which(input$NumContrasts==k$all[,1])
+              sampleColumns = c(which(v$data$group==k$k2[num]),which(v$data$group==k$k1[num])) 
+              
+              rownames(exp) = exp$SYMBOL
+              exp = subset(exp, select = -c(SYMBOL))
+              # exp = exp[,sampleColumns]
+              #limit to 100 genes
+              # if(nrow(exp)>100){
+              #   exp = exp[1:100,]
+              # }
+              #set heatmap parameters
+              matCol = data.frame(group=v$data$group[sampleColumns])
+              rownames(matCol) = v$data$title[sampleColumns]
+              matColors = list(group = unique(colors[sampleColumns]))
+              names(matColors$group) = unique(v$data$group[sampleColumns])
+              path_name = paste0(toupper(pathways()$up[input$topUp_rows_selected, 'description']),' PATHWAY ')
+              #get z-scores by row
+              exp = t(scale(t(exp)))  
+              
+              if (nrow(exp) > 30){
+                pheatmap(exp, main=path_name, annotation_col=matCol, annotation_colors=matColors, drop_levels=TRUE, fontsize_row = 6)
+                } else {
+                  pheatmap(exp, main=path_name, annotation_col=matCol, annotation_colors=matColors, drop_levels=TRUE, fontsize_row = 10)
+                }
+            }
+          }
+        )
+        output$geneHeatmapDw=renderPlot(
+          {
+            if (length(pathways()$dw[input$topDown_rows_selected, 'gene.list'])==0){
+              showNotification('Select a pathway to see heatmap below')
+            } else {
+              human2mouse = read.delim('human2mouse.csv',sep=',')
+              #select user input pathway, extract genes
+              genes = pathways()$dw[input$topDown_rows_selected, 'gene.list']
+              genes = strsplit(as.character(genes),' ')
+              genes = unlist(genes)
+              
+              #extract normalized expression, subset by genes, filter columns, aggregate duplicate symbols with means
+              exp = deg()$all
+              exp = exp[exp$SYMBOL %in% genes,]
+              #if mouse data, convert from human to mouse gene orthologs
+              if (!(raw()@annotation=="pd.hg.u133.plus.2" | raw()@annotation=="pd.hugene.2.0.st" | raw()@annotation=="pd.clariom.s.human.ht" | raw()@annotation=="pd.clariom.s.human" | raw()@annotation=='pd.hg.u133a' | raw()@annotation=='pd.hugene.1.0.st.v1' | raw()@annotation=='pd.hg.u133a.2' | raw()@annotation=='pd.huex.1.0.st.v2' | raw()@annotation=='pd.hg.u219' | raw()@annotation=='pd.ht.hg.u133.plus.pm' | raw()@annotation=='pd.hg.u95av2' | raw()@annotation=='pd.hta.2.0' | raw()@annotation=='pd.hg.u133b' | raw()@annotation=='pd.hugene.1.1.st.v1' | raw()@annotation=='pd.hugene.2.1.st')) {
+                genes = human2mouse$mouse[human2mouse$human %in% genes]
+                genes = as.character(genes)
+                exp = deg()$all
+                exp = exp[exp$SYMBOL %in% genes,]
+              }
+              exp = subset(exp, select = -c(ACCNUM,DESC,ENTREZ,Row.names))
+              exp = aggregate(.~SYMBOL,data=exp,mean)
+              
+              #extract user input contrasts (columns)
+              k$all = cbind(paste0(k$k1, ' vs ', k$k2))
+              num = which(input$NumContrasts==k$all[,1])
+              sampleColumns = c(which(v$data$group==k$k2[num]),which(v$data$group==k$k1[num])) 
+              rownames(exp) = exp$SYMBOL
+              exp = subset(exp, select = -c(SYMBOL))
+              # exp = exp[,sampleColumns]
+              #limit to 100 genes
+              # if(nrow(exp)>100){
+              #   exp = exp[1:100,]
+              # }
+              #set heatmap parameters
+              matCol = data.frame(group=v$data$group[sampleColumns])
+              rownames(matCol) = v$data$title[sampleColumns]
+              matColors = list(group = unique(colors[sampleColumns]))
+              names(matColors$group) = unique(v$data$group[sampleColumns])
+              path_name = paste0(toupper(pathways()$dw[input$topDown_rows_selected, 'description']),' PATHWAY (max 100 genes)')
+              #get z-scores by row
+              exp = t(scale(t(exp)))  
+              
+              if (nrow(exp) > 30){
+                pheatmap(exp, main=path_name, annotation_col=matCol, annotation_colors=matColors, drop_levels=TRUE, fontsize_row = 6)
+              } else {
+                pheatmap(exp, main=path_name, annotation_col=matCol, annotation_colors=matColors, drop_levels=TRUE, fontsize_row = 10)
+              }
+            }
+          }
         )
         output$volcano=renderPlotly(
           {
@@ -1119,15 +1167,18 @@ shinyServer(function(input, output) {
             
             sampleColumns = c(which(v$data$group==k$k2[num]),which(v$data$group==k$k1[num]))          #subset columns (samples) for user input contrast
             paths = ssGSEA()$ssgsResults[rownames(ssGSEA()$ssgsResults) %in% rownames(each)[1:50],]   #subset diff exprs pathways for user input contrast
-            paths = paths[,sampleColumns]
-            colnames(paths) = v$data$title[sampleColumns]
+            # paths = paths[,sampleColumns]
+            #colnames(paths) = v$data$title[sampleColumns]
             
             matCol = data.frame(group=v$data$group[sampleColumns])
             rownames(matCol) = v$data$title[sampleColumns]
             matColors = list(group = unique(colors[sampleColumns]))
             names(matColors$group) = unique(v$data$group[sampleColumns])
+            #calculate z scores for rows
+            paths = paths[,sampleColumns]
+            paths = t(scale(t(paths)))  
             
-            pheatmap(paths,color=inferno(10),annotation_col=matCol,annotation_colors=matColors,drop_levels=TRUE,fontsize=7, main='Enrichment Scores for Top 50 Differentially Expressed ssGSEA Pathways')
+            pheatmap(paths,annotation_col=matCol,annotation_colors=matColors,drop_levels=TRUE,fontsize=7, main='Enrichment Scores for Top 50 Differentially Expressed ssGSEA Pathways')
             
           }
         )

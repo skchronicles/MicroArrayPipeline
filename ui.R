@@ -106,41 +106,6 @@ shinyUI(
           ))
     ),
     br(),
-    
-    
-    #shinyjs::hidden(
-    #  div(id='hide1',
-    # conditionalPanel(
-    # condition = 'input.number == 1',
-    #     fluidRow(),
-    #       column(2,
-    #         #lapply(1:input$number, function(i) {     
-    #         selectInput("group1", "Please select a group",
-    #                     #choices = paste0('Group', i),
-    #                     choices = c("Group_1" = "Group_1"),
-    #                     selected = "Group_1"
-    #         #)}
-    #       ),
-    #       actionButton("button2", "Define")
-    # )
-    # ),
-    # 
-    #   conditionalPanel(
-    #   condition = 'input.number == 2',
-    #   fluidRow(),
-    #   column(2,
-    #          #lapply(1:input$number, function(i) {     
-    #          selectInput("group1", "Please select a group",
-    #                      #choices = paste0('Group', i),
-    #                      choices = c("Group_1" = "Group_1", "Group_2" = "Group_2"),
-    #                      selected = "Group_1"
-    #                      #)}
-    #          ),
-    #          actionButton("button2", "Define")
-    #   )
-    # ),
-    
-    
     br(),
     shinyjs::hidden(
       div(id= "hide2",
@@ -235,11 +200,11 @@ shinyUI(
                             fluidRow(align='Top',
                                      column(3,
                                             selectInput('geneSet', label=h6("Choose Gene Set for ssGSEA"),
-                                                        list(`Human` = c("","H: Hallmark Gene Sets"="h.all.v6.1.symbols.gmt", "C1: Positional Gene Sets"="c1.all.v6.1.symbols.gmt", "C2: Curated Gene Sets"="c2.all.v6.1.symbols.gmt", 
-                                                          "C3: Motif Gene Sets"="c3.all.v6.1.symbols.gmt", "C4: Computational Gene Sets"="c4.all.v6.1.symbols.gmt","C5: GO gene sets"="c5.all.v6.1.symbols.gmt", 
-                                                          "C6: Oncogenic Signatures"="c6.all.v6.1.symbols.gmt", "C7: Immunologic Signatures"="c7.all.v6.1.symbols.gmt"),
-                                                          `Mouse` = c("H: Hallmark Gene Sets"="mouse_H_v5p2.gmt", "C2: Curated Gene Sets"="mouse_C2_v5p2.gmt", "C3: Motif Gene Sets"="mouse_C3_v5p2.gmt", "C4: Computational Gene Sets"="mouse_C4_v5p2.gmt",
-                                                                      "C5: GO gene sets"="mouse_C5_v5p2.gmt", "C6: Oncogenic Signatures"="mouse_C6_v5p2.gmt", "C7: Immunologic Signatures"="mouse_C7_v5p2.gmt")))),
+                                                        list(`Human` = c("","H: Hallmark Gene Sets"="h.all.v6.2.symbols.gmt", "C1: Positional Gene Sets"="c1.all.v6.2.symbols.gmt", "C2: Curated Gene Sets"="c2.all.v6.2.symbols.gmt", 
+                                                          "C3: Motif Gene Sets"="c3.all.v6.2.symbols.gmt", "C4: Computational Gene Sets"="c4.all.v6.2.symbols.gmt","C5: GO gene sets"="c5.all.v6.2.symbols.gmt", 
+                                                          "C6: Oncogenic Signatures"="c6.all.v6.2.symbols.gmt", "C7: Immunologic Signatures"="c7.all.v6.2.symbols.gmt"),
+                                                          `Mouse` = c("Co-expression"="MousePath_Co-expression_entrez.gmt", "Gene Ontology"="MousePath_GO_entrez.gmt", "Curated Pathway"="MousePath_Pathway_entrez.gmt", "Metabolic"="MousePath_Metabolic_entrez.gmt",
+                                                                      "TF targets"="MousePath_TF_entrez.gmt", "miRNA targets"="MousePath_miRNA_entrez.gmt", "Location"="MousePath_Location_entrez.gmt")))),
                                      column(3,
                                             numericInput("pvalSS", label=h6("P-value threshold for ssGSEA"), value=1)),
                                      column(3,
@@ -260,13 +225,13 @@ shinyUI(
                                                    tabPanel("Histogram",plotOutput("rmahist")),
                                                    tabPanel("Maplots",uiOutput("normaplot")),
                                                    tabPanel("Boxplots",plotOutput("rmabox")),
-                                                   tabPanel("3D-PCA",rglwidgetOutput("pca3d")),
+                                                   tabPanel("3D-PCA",plotlyOutput("pca3d")),
                                                    tabPanel("Interactive Heatmap",plotlyOutput("heatmap"))
                                        ),
                                        navbarMenu (title="DEG-Enrichments-tables",
                                                    tabPanel("Differentially Expressed Genes",DT::dataTableOutput("deg")),
-                                                   tabPanel("Pathways for Upregulated Genes",DT::dataTableOutput("topUp")),
-                                                   tabPanel("Pathways for Downregulated Genes",DT::dataTableOutput("topDown")),
+                                                   tabPanel("Pathways for Upregulated Genes",DT::dataTableOutput("topUp"),br(),br(),plotOutput('geneHeatmapUp', width='100%', height='800px')),
+                                                   tabPanel("Pathways for Downregulated Genes",DT::dataTableOutput("topDown"),br(),br(),plotOutput('geneHeatmapDw', width='100%', height='800px')),
                                                    tabPanel("Interactive Volcano Plot",plotly::plotlyOutput('volcano'))
                                        ),
                                        navbarMenu (title='Single Sample GSEA',
